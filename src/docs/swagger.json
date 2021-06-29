@@ -1,0 +1,42 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/jwk/generate": {
+            "get": {
+                "description": "Randomly generates a jwk pair (public and private)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Generates a new Jwk pair",
+                "operationId": "generate-jwk",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.JWKResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.JWKResponse": {
+            "type": "object",
+            "properties": {
+                "private_b64": {
+                    "type": "string"
+                },
+                "public_b64": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

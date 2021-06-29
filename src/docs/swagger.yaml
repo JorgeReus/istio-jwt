@@ -1,0 +1,26 @@
+definitions:
+  main.JWKResponse:
+    properties:
+      private_b64:
+        type: string
+      public_b64:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /jwk/generate:
+    get:
+      consumes:
+      - application/json
+      description: Randomly generates a jwk pair (public and private)
+      operationId: generate-jwk
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.JWKResponse'
+      summary: Generates a new Jwk pair
+swagger: "2.0"

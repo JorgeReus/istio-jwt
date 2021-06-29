@@ -3,17 +3,24 @@ module github.com/JorgeReus/istio-jwt
 go 1.16
 
 require (
-	github.com/aws/aws-sdk-go v1.38.5
-	github.com/coreos/go-oidc/v3 v3.0.0
+	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/andybalholm/brotli v1.0.3 // indirect
+	github.com/arsmn/fiber-swagger/v2 v2.13.0
+	github.com/go-openapi/jsonreference v0.19.6 // indirect
+	github.com/go-openapi/spec v0.20.3 // indirect
+	github.com/go-openapi/swag v0.19.15 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
-	github.com/gofiber/fiber/v2 v2.7.1
-	github.com/gofiber/template v1.6.8
-	github.com/hashicorp/consul/api v1.1.0
-	github.com/joho/godotenv v1.3.0
+	github.com/gofiber/fiber/v2 v2.13.0
+	github.com/google/go-cmp v0.4.0 // indirect
+	github.com/klauspost/compress v1.13.1 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
-	golang.org/x/net v0.0.0-20201110031124-69a78807bb2b
-	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
+	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/swaggo/swag v1.7.0
+	github.com/valyala/fasthttp v1.27.0 // indirect
+	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
+	golang.org/x/sys v0.0.0-20210616094352-59db8d763f22 // indirect
+	golang.org/x/tools v0.1.4 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/square/go-jose.v2 v2.5.1
 )

@@ -19,7 +19,57 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/main.JWKResponse"
+                            "$ref": "#/definitions/schemas.JWKResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/jwk/public": {
+            "get": {
+                "description": "Gets the public JWK",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Gets the current public JWK",
+                "operationId": "get-public-jwk",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.PublicJWKResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/jwt/generate": {
+            "post": {
+                "description": "Randomly generates a json web token baes on a subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Generates a new JSON Web Token",
+                "operationId": "generate-jwt",
+                "parameters": [
+                    {
+                        "description": "Body for subject",
+                        "name": "b",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/schemas.InputJWTClaims"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -27,7 +77,18 @@
         }
     },
     "definitions": {
-        "main.JWKResponse": {
+        "schemas.InputJWTClaims": {
+            "type": "object",
+            "required": [
+                "subject"
+            ],
+            "properties": {
+                "subject": {
+                    "type": "string"
+                }
+            }
+        },
+        "schemas.JWKResponse": {
             "type": "object",
             "properties": {
                 "private_b64": {
@@ -35,6 +96,37 @@
                 },
                 "public_b64": {
                     "type": "string"
+                }
+            }
+        },
+        "schemas.PublicJWKResponse": {
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "alg": {
+                                "type": "string"
+                            },
+                            "e": {
+                                "type": "string"
+                            },
+                            "kid": {
+                                "type": "string"
+                            },
+                            "kty": {
+                                "type": "string"
+                            },
+                            "n": {
+                                "type": "string"
+                            },
+                            "use": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 }
             }
         }

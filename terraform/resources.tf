@@ -1,4 +1,5 @@
 resource "kubernetes_manifest" "gateway_demo_gateway" {
+  depends_on = [ helm_release.ingress-gateway]
   provider = kubernetes-alpha
   manifest = {
     "apiVersion" = "networking.istio.io/v1alpha3"
@@ -28,6 +29,7 @@ resource "kubernetes_manifest" "gateway_demo_gateway" {
 }
 
 resource "kubernetes_manifest" "authorizationpolicy_require_jwt" {
+  depends_on = [ kubernetes_manifest.gateway_demo_gateway ]
   provider = kubernetes-alpha
   manifest = {
     "apiVersion" = "security.istio.io/v1beta1"
@@ -59,3 +61,4 @@ resource "kubernetes_manifest" "authorizationpolicy_require_jwt" {
     }
   }
 }
+

@@ -32,5 +32,9 @@ func main() {
 
 	app.Get("/jwk/public", controllers.GetPublicJWK)
 
+	app.Get("/healthz", controllers.Healthz)
+
+	app.Get("/readiness", controllers.ReadinessProbe)
+
 	log.Fatal(app.Listen(":8080"))
 }

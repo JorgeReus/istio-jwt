@@ -36,6 +36,14 @@ definitions:
 info:
   contact: {}
 paths:
+  /healthz:
+    get:
+      description: Healthiness of the jwk service
+      operationId: healthz
+      responses:
+        "200":
+          description: ""
+      summary: Healhiness probe
   /jwk/generate:
     get:
       consumes:
@@ -83,4 +91,12 @@ paths:
           schema:
             type: string
       summary: Generates a new JSON Web Token
+  /readiness:
+    get:
+      description: Readiness of the jwk service
+      operationId: readiness
+      responses:
+        "200":
+          description: ""
+      summary: Readiness probe
 swagger: "2.0"

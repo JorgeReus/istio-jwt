@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"time"
 
 	"github.com/JorgeReus/istio-jwt/application/schemas"
@@ -90,4 +91,27 @@ func GenerateJwt(c *fiber.Ctx) error {
 func GetPublicJWK(c *fiber.Ctx) error {
 	jwk := jwks.PublicJwk()
 	return c.JSON(jwk)
+}
+
+// Ready godoc
+// @Summary Readiness probe
+// @Description Readiness of the jwk service
+// @ID readiness
+// @Success 200
+// @Router /readiness [get]
+func ReadinessProbe(c *fiber.Ctx) error {
+	if len(jwks.PublicJwk().Keys) == 0 {
+		return errors.New("App hasn't initialized yet")
+	}
+	return nil
+}
+
+// Healthy godoc
+// @Summary Healhiness probe
+// @Description Healthiness of the jwk service
+// @ID healthz
+// @Success 200
+// @Router /healthz [get]
+func Healthz(c *fiber.Ctx) error {
+	return c.SendStatus(200)
 }

@@ -24,6 +24,18 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/healthz": {
+            "get": {
+                "description": "Healthiness of the jwk service",
+                "summary": "Healhiness probe",
+                "operationId": "healthz",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/jwk/generate": {
             "get": {
                 "description": "Randomly generates a jwk pair (public and private)",
@@ -91,6 +103,18 @@ var doc = `{
                         "schema": {
                             "type": "string"
                         }
+                    }
+                }
+            }
+        },
+        "/readiness": {
+            "get": {
+                "description": "Readiness of the jwk service",
+                "summary": "Readiness probe",
+                "operationId": "readiness",
+                "responses": {
+                    "200": {
+                        "description": ""
                     }
                 }
             }

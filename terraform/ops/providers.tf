@@ -19,3 +19,8 @@ provider "docker" {
     config_file = pathexpand("~/.docker/config.json")
   }
 }
+
+provider "kubernetes-alpha" {
+  config_path = "~/.kube/config"
+  config_context_cluster   = "minikube"
+}

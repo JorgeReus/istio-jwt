@@ -18,6 +18,7 @@ require (
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/swaggo/swag v1.7.0
 	github.com/valyala/fasthttp v1.27.0 // indirect
+	go.uber.org/automaxprocs v1.4.0
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
 	golang.org/x/sys v0.0.0-20210616094352-59db8d763f22 // indirect
 	golang.org/x/tools v0.1.4 // indirect

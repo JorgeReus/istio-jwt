@@ -4,11 +4,13 @@ import (
 	"log"
 
 	"github.com/JorgeReus/istio-jwt/application/controllers"
+
 	_ "github.com/JorgeReus/istio-jwt/docs"
 	"github.com/JorgeReus/istio-jwt/jwks"
 	swagger "github.com/arsmn/fiber-swagger/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	_ "go.uber.org/automaxprocs"
 )
 
 func init() {

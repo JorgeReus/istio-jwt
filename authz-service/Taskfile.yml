@@ -1,0 +1,68 @@
+version: '3'
+
+vars:
+  EXE: authz-service{{exeExt}}
+
+tasks:
+  default:
+    cmds:
+      - task: dev
+
+  dev:
+    desc: Start the local environment
+    cmds:
+      - air -c .air.toml
+
+  dl-deps:
+    desc: Install tools required to run/build this app
+    cmds:
+      - task: go-install
+        vars: {REPO: github.com/swaggo/swag/cmd/swag@latest}
+      - task: go-install
+        vars: {REPO: github.com/cosmtrek/air@latest}
+      - task: go-install
+        vars: {REPO: github.com/joho/godotenv/cmd/godotenv@latest}
+      - task: tidy
+
+  go-install:
+    cmds:
+      - go install {{.REPO}}
+
+  init:
+    desc: Initialize the environment
+    deps: [dl-deps]
+    cmds:
+      - task: tidy
+
+  tidy:
+    cmds:
+      - go mod tidy
+
+  test:
+    desc: Runs the tests
+    cmds:
+      - go test ./... -coverprofile=coverage.out
+    sources:
+      - ./**/*.go
+
+  build:
+    desc: Build the web app
+    deps: [test]
+    cmds:
+      - CGO_ENABLED=0 go build -o {{.EXE}} ./cmd/web/main.go
+    sources:
+      - ./**/*.go
+    generates:
+      - ./{{.EXE}}
+
+  docker-build:
+    desc: Build docker image with tag latest
+    deps: [build]
+    cmds:
+      - docker build -t authz-service:latest .
+
+  docker-run:
+    desc: Run docker image
+    deps: [docker-build]
+    cmds:
+      - docker run -it --rm -p 8080:8080 -p 9090:9090 authz-service:latest

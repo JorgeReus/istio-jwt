@@ -1,0 +1,97 @@
+version: '3'
+
+vars:
+  EXE: auth-service{{exeExt}}
+
+tasks:
+  default:
+    cmds:
+      - task: dev
+
+  dev:
+    desc: Start the local environment
+    deps: [docs]
+    cmds:
+      - godotenv -f .env air -c .air.toml
+
+  docs:
+    desc: Generate the swagger docs
+    cmds:
+      - swag init -g cmd/web/main.go -o app/_docs
+    sources:
+      - ./app/dto/*.go
+      - ./app/controllers/*.go
+    generates:
+      - ./app/_docs/*
+
+  build:
+    desc: Build the web app
+    deps: [test, docs]
+    cmds:
+      - CGO_ENABLED=0 go build -o {{.EXE}} ./cmd/web/main.go
+    sources:
+      - ./**/*.go
+    generates:
+      - ./{{.EXE}}
+
+  run:
+    desc: Build and run the authentication service
+    cmds:
+      - task: build
+      - godotenv -f .env ./{{.EXE}}
+
+  test:
+    desc: Runs the tests
+    cmds:
+      - go test ./... -coverprofile=coverage.out
+    sources:
+      - ./**/*.go
+
+  coverage:
+    desc: Display the coverage in the browser
+    deps: [test]
+    cmds:
+      - go tool cover -html=coverage.out   
+
+  dl-deps:
+    desc: Install tools required to run/build this app
+    cmds:
+      - task: go-install
+        vars: {REPO: github.com/swaggo/swag/cmd/swag@latest}
+      - task: go-install
+        vars: {REPO: github.com/cosmtrek/air@latest}
+      - task: go-install
+        vars: {REPO: github.com/joho/godotenv/cmd/godotenv@latest}
+      - task: tidy
+
+  go-install:
+    cmds:
+      - go install {{.REPO}}
+
+  init:
+    desc: Initialize the environment
+    deps: [dl-deps]
+    cmds:
+      - task: generate-jwk
+
+
+  generate-jwk:
+    desc: Creates a new set of JWK
+    cmds:
+      - go run ./cmd/_jwk-generator/generate-jwk.go
+
+  tidy:
+    cmds:
+      - go mod tidy
+
+  docker-build:
+    desc: Build docker image with tag latest
+    deps: [build]
+    cmds:
+      - docker build -t auth-service:latest .
+
+  docker-run:
+    desc: Run docker image
+    deps: [docker-build]
+    cmds:
+      - docker run -it --rm -p 8080:8080 --env-file .env auth-service:latest

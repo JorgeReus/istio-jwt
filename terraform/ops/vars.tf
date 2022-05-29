@@ -1,3 +1,7 @@
 variable "app-name" {
-  default = "jwt-service" 
+  default = "nginx" 
+}
+
+variable "registry_name" {
+  default = "istio-test-registry"
 }

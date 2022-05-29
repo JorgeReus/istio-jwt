@@ -1,2 +1,9 @@
 .terraform/
 terraform.tfstate*
+tmp
+.task/
+.env
+out/
+*.out
+auth-service/auth-service
+authz-service/authz-service

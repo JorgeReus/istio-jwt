@@ -1,0 +1,7 @@
+.env
+.task/
+Taskfile.yml
+*.md
+out/
+Dockerfile
+*.toml

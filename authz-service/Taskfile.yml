@@ -45,6 +45,12 @@ tasks:
     sources:
       - ./**/*.go
 
+  coverage:
+    desc: Display the coverage in the browser
+    deps: [test]
+    cmds:
+      - go tool cover -html=coverage.out   
+
   build:
     desc: Build the web app
     deps: [test]

@@ -2,7 +2,6 @@
 terraform.tfstate*
 tmp
 .task/
-.env
 out/
 *.out
 auth-service/auth-service

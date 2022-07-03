@@ -1,8 +1,6 @@
 terraform {
   required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "2.14.0"
-    }
+    kubernetes = "~> 2.10.0"
   }
+  required_version = "~> 1.0.0"
 }

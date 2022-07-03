@@ -65,5 +65,5 @@ func main() {
 		return controllers.ValidateRefreshToken(c, jwkProvider)
 	})
 
-	app.Listen(":8080")
+	app.Listen(fmt.Sprintf(":%d", appConfig.Port))
 }

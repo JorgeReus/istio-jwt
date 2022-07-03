@@ -1,14 +1,20 @@
-# Plataforma CENEVAL oidc auth
+# JWT authorization service
 
-## Installation
-- Download golang 1.18
-- Download [godotenv](https://github.com/joho/godotenv)
-- Download [air](https://github.com/cosmtrek/air)
+This is an example GRPC & HTTP service that will decode a JWT in raw form(bas64) and will parse the claim, groups. 
+If you have a string `"admin"` in this claim your request will be allowed, permission denied otherwhise.
 
-## Run
-Be sure to have a valid .env
-`godotenv -f .env air -c .air.toml`
+## Actions
 
-## Dependencies
-1. Oauth2 google credentials
-2. Enable Admin API in the GCP project
+### Install dependencies
+1. Follow the [task install guide](https://taskfile.dev/installation/)
+2. Run `task dl-deps`
+
+### Run development mode
+Run `task dev`, this will run the http service in the port `8080` & the GRPC service in the port `9090`
+
+## Build docker image
+Run `task docker-build`
+
+## Local testing
+1. Generate a jwt token using the [auth service](../auth-service) or something like [this](http://jwtbuilder.jamiekurtz.com/)
+2. Send an http request with a JWT authorization header (e.g. `http localhost:8080 "Authorization: Bearer $jwt"`)

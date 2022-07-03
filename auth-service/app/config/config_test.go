@@ -19,6 +19,7 @@ func setRequiredEnvs() {
 	os.Setenv("JWT_ISSUER", "a")
 	os.Setenv("JWT_AUDIENCE", "a")
 	os.Setenv("SCHEME_DOMAIN_NAME", "asd")
+	os.Setenv("PORT", "8080")
 }
 
 func testRequired(t *testing.T) {

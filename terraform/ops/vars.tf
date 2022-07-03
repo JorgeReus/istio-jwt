@@ -1,5 +1,5 @@
 variable "app-name" {
-  default = "nginx" 
+  default = "nginx"
 }
 
 variable "registry_name" {

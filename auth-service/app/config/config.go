@@ -19,6 +19,7 @@ type appConfig struct {
 	JwtIssuer        string `env:"JWT_ISSUER" env-required:"true"`
 	JwtAudience      string `env:"JWT_AUDIENCE" env-required:"true"`
 	SchemeDomainName string `env:"SCHEME_DOMAIN_NAME" env-required:"true"`
+	Port             uint16 `env:"PORT" env-required:"true"`
 }
 
 func GetConfig() *appConfig {
